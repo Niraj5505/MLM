@@ -1,0 +1,545 @@
+:root {
+  --bg-dark: #ffffff;
+  --bg-card: #ffffff;
+  --bg-light: #f8fafc;
+  --primary: #4f46e5;
+  --primary-hover: #4338ca;
+  --text-main: #0f172a;
+  --text-muted: #64748b;
+  --border: #e2e8f0;
+  --font: 'Inter', sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font);
+  background-color: var(--bg-dark);
+  color: var(--text-main);
+  line-height: 1.5;
+}
+
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* header & navbar - fixed without enough page offset causes overlap */
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--border);
+  z-index: 100;
+}
+
+.nav-container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 16px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo a {
+  color: var(--text-main);
+  text-decoration: none;
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+.logo span {
+  color: var(--primary);
+}
+
+.nav-menu {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+
+.nav-links {
+  display: flex;
+  list-style: none;
+  gap: 24px;
+}
+
+.nav-links a {
+  color: var(--text-muted);
+  text-decoration: none;
+  font-size: 0.95rem;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+
+.nav-links a:hover {
+  color: var(--text-main);
+}
+
+.nav-btn-group {
+  display: flex;
+  gap: 12px;
+}
+
+/* button styles */
+.btn {
+  display: inline-block;
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: background 0.2s, transform 0.1s;
+}
+
+.btn-primary {
+  background-color: var(--primary);
+  color: #fff;
+}
+
+.btn-primary:hover {
+  background-color: var(--primary-hover);
+}
+
+.btn-secondary {
+  background-color: transparent;
+  color: var(--text-main);
+  border-color: var(--border);
+}
+
+.btn-secondary:hover {
+  background-color: var(--bg-light);
+}
+
+.btn-lg {
+  padding: 12px 24px;
+  font-size: 1rem;
+}
+
+.full-width {
+  width: 100%;
+  text-align: center;
+}
+
+/* mobile hamburger button */
+.mobile-toggle {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.mobile-toggle .bar {
+  width: 22px;
+  height: 2px;
+  background-color: var(--text-main);
+}
+
+/* hero */
+.hero {
+  padding: 30px 0 30px; /* bug: not enough top padding for fixed navbar, causing top overlap */
+  text-align: center;
+  border-bottom: 1px solid var(--border);
+}
+
+.hero-content {
+  max-width: 780px;
+}
+
+.tag {
+  display: inline-block;
+  background-color: rgba(79, 70, 229, 0.08);
+  color: var(--primary);
+  border: 1px solid rgba(79, 70, 229, 0.18);
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  margin-bottom: 16px;
+}
+
+.hero h1 {
+  font-size: 2.5rem;
+  line-height: 1.2;
+  margin-bottom: 16px;
+}
+
+.hero h1 span {
+  color: var(--primary);
+}
+
+.hero p {
+  color: var(--text-muted);
+  font-size: 1.1rem;
+  margin-bottom: 28px;
+}
+
+.hero-actions {
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+  margin-bottom: 40px;
+  flex-wrap: wrap;
+}
+
+/* stats box with negative margin that overlaps into the next section */
+.stats-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  padding: 24px;
+  background-color: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.06);
+  position: relative;
+  margin-bottom: -60px; /* overlapping design bug: covers the section title below */
+  z-index: 10;
+}
+
+.stat-item h3 {
+  font-size: 1.5rem;
+  color: var(--text-main);
+}
+
+.stat-item p {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin-top: 4px;
+}
+
+/* tiers */
+.tiers {
+  padding: 20px 0 60px; /* bug: insufficient padding-top causes the stats box to overlap the heading */
+}
+
+.section-title {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.section-title h2 {
+  font-size: 1.8rem;
+  margin-bottom: 8px;
+}
+
+.section-title p {
+  color: var(--text-muted);
+}
+
+.tier-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 24px;
+}
+
+.card {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 24px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.card.popular {
+  border-color: var(--primary);
+  margin-top: -15px; /* overlap upwards */
+  margin-left: -12px; /* overlap sideways into adjacent card */
+  margin-right: -12px;
+  z-index: 2;
+  box-shadow: 0 10px 30px rgba(79, 70, 229, 0.15);
+}
+
+.card .badge {
+  position: absolute;
+  top: 16px; /* bug: placed awkwardly overlapping the card-tier name */
+  left: 80px;
+  background-color: var(--primary);
+  color: #fff;
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 12px;
+  z-index: 5;
+}
+
+.card-tier {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--primary);
+}
+
+.card .price {
+  font-size: 2rem;
+  font-weight: 700;
+  margin: 12px 0 6px;
+}
+
+.card .price span {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  font-weight: 400;
+}
+
+.card .desc {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  margin-bottom: 20px;
+}
+
+.card .features {
+  list-style: none;
+  margin-bottom: 24px;
+  flex-grow: 1;
+}
+
+.card .features li {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  margin-bottom: 8px;
+}
+
+/* network tree section */
+.tree-section {
+  padding: 50px 0;
+  background: #f8fafc;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+
+.tree-wrapper {
+  max-width: 600px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.tree-node {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 12px 18px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+  transition: transform 0.2s, border-color 0.2s;
+  user-select: none;
+}
+
+.tree-node:hover {
+  border-color: var(--primary);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(79, 70, 229, 0.12);
+}
+
+.tree-node.root-node {
+  border-color: var(--primary);
+  box-shadow: 0 4px 15px rgba(79, 70, 229, 0.15);
+}
+
+.node-avatar {
+  font-size: 1.4rem;
+}
+
+.node-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.node-info strong {
+  font-size: 0.95rem;
+  color: var(--text-main);
+}
+
+.node-info span {
+  font-size: 0.78rem;
+  color: var(--primary);
+}
+
+.node-info small {
+  font-size: 0.75rem;
+  color: #10b981;
+}
+
+/* connector lines - overlapping bug */
+.connector-line.vertical-line {
+  width: 2px;
+  height: 34px;
+  background-color: var(--primary);
+  margin: 0 auto;
+  margin-bottom: -12px; /* bug: vertical connector overlaps into node text */
+  position: relative;
+  z-index: 1;
+}
+
+.tree-row {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+}
+
+.tree-branch {
+  flex: 1;
+  max-width: 240px;
+  margin: 0 -8px; /* bug: negative horizontal margin causes branch nodes to overlap */
+  position: relative;
+  z-index: 2;
+}
+
+.tree-status {
+  margin-top: 25px;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  background: var(--bg-card);
+  padding: 6px 16px;
+  border-radius: 20px;
+  border: 1px solid var(--border);
+}
+
+.tree-status strong {
+  color: var(--primary);
+}
+
+/* calculator - overlapping into footer */
+.calculator {
+  padding: 50px 0 0;
+  margin-bottom: -50px; /* bug: card overlaps the footer border & text */
+  position: relative;
+  z-index: 10;
+}
+
+.calc-box {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 30px;
+  max-width: 520px;
+  margin: 0 auto;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.07);
+}
+
+.calc-box h2 {
+  font-size: 1.5rem;
+  margin-bottom: 6px;
+}
+
+.calc-box p {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  margin-bottom: 20px;
+}
+
+.calc-form .field {
+  margin-bottom: 16px;
+}
+
+.calc-form label {
+  display: block;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin-bottom: 6px;
+}
+
+.calc-form input {
+  width: 100%;
+  padding: 10px;
+  background-color: #ffffff;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  color: var(--text-main);
+  font-size: 0.95rem;
+}
+
+.calc-form input:focus {
+  outline: none;
+  border-color: var(--primary);
+}
+
+.calc-output {
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1px solid var(--border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.calc-output .amount {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #10b981;
+}
+
+/* footer */
+.footer {
+  border-top: 1px solid var(--border);
+  padding: 40px 0 24px;
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  background-color: #f8fafc;
+}
+
+/* responsive */
+@media (max-width: 768px) {
+  .mobile-toggle {
+    display: flex;
+  }
+
+  .nav-menu {
+    display: none;
+    position: absolute;
+    top: 60px;
+    left: 0;
+    right: 0;
+    background-color: #ffffff;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+    flex-direction: column;
+    padding: 20px;
+    border-bottom: 1px solid var(--border);
+    gap: 16px;
+  }
+
+  /* todo: check mobile menu toggle */
+  .nav-menu.open {
+    display: flex;
+  }
+
+  .nav-links {
+    flex-direction: column;
+    text-align: center;
+    gap: 14px;
+  }
+
+  .nav-btn-group {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .hero h1 {
+    font-size: 1.9rem;
+  }
+
+  .stats-row {
+    grid-template-columns: 1fr;
+  }
+}
